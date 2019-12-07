@@ -1,9 +1,17 @@
 import unittest
 from acme import Product
+<<<<<<< HEAD
+from acme_report import generate_products,ADJECTIVES,NOUNS
+from random import randint
+
+
+class AcmeProductTests(unittest.TestCase):
+=======
 from acme_report import generate_products, ADJECTIVES, NOUNS
 
 
 class AcmeProductTests(unittest.testCase):
+>>>>>>> a03f3728f3dae925a75a37a9b60278234a43d116
     def test__price(self):
         prod = Product('Test Product')
         self.assertEqual(prod.price, 5)
@@ -29,5 +37,9 @@ class AcmeReportTests(unittest.TestCase):
         for n in names:
             self.assertEqual(len(n.split(' ')), 2)
             
+<<<<<<< HEAD
+if __name__ == '__main__':
+=======
 if __name__ = __main__:
+>>>>>>> a03f3728f3dae925a75a37a9b60278234a43d116
     unittest.main()
