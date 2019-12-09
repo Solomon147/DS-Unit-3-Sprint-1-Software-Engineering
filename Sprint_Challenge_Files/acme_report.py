@@ -1,43 +1,49 @@
-from acme import Product
 from random import randint, sample, uniform
-import numpy as np
-import random 
+from acme import Product
 
+ADJECTIVES = ['Awesome', 'Shiny', 'Impressive', 'Portable', 'Improved']
+NOUNS = ['Anvil', 'Catapult' 'Disguise' 'Mousetrap', '???']
 
-def generate_products(num=30):
-    ADJECTIVES = ['Awesome', 'Shiny', 'Impressive', 'Portable', 'Improved']
-    NOUNS = ['Anvil', 'Catapult', 'Disguise', 'Mousetrap','???']
+#average listing
+def avg(list):
+    """Function to calculate the average value of a list of numerical values"""
+    return sum(list)/len(list)
 
-    inventory = []
-    for i in range(num):
-        run_name = (random.choice(ADJECTIVES)+ " " +random.choice(NOUNS))
-        run_price = random.randint(5,100)
-        run_weight = random.randint(5,100)
-        run_flam = random.uniform(0.0,2.5)
-        prod = Product(name=run_name, price = run_price, weight = run_weight,
-                      flammability = run_flam)
+#generate_produts()
+def generate_products(num_products = 30):
 
-        inventory.append(prod)
-        return inventory
+    """
+    Function to randomly generate a list of n products where n is the
+    parameter passed to the function
+    """
+    
+    products =[]
+    for i in range(num_products):
+        name = sample(ADJECTIVES, 1)[0] + " " + sample(NOUNS, 1)[0]
+        price = randint(5, 100)
+        weight = randint(5, 100)
+        flammability = uniform(0, 2.5)
+        products.append(Product(name, price, weight, flammability))
+    return products
 
+def inventory_report(products):
 
-def inventory_report(inventory):
-    from statistics import mean
+    names = [prod.name for prod in products]
+    prices = [prod.price for prod in products]
+    weights = [prod.weight for prod in products]
+    flams = [prod.flammability  for prod in products]
 
-    n_unique = len(set([x.name for x in inventory]))
-    mean_price = mean([x.price for x in inventory])
-    mean_weight = mean([x.weight for x in inventory])
-    mean_flammability = mean([x.flammability for x in inventory])
+    num_prod_names = len(set(names))
+    avg_price = avg(prices)
+    avg_weight = avg(weights)
+    avg_flam = avg(flams)
 
-
-
-    print('ACME CORPORATION OFFICIAL INVENTORY REPORT')
-    print(f'Unique product names: {n_unique}')
-    print(f'Average price: {mean_price}')
-    print(f'Average weight: {mean_weight}')
-    print(f'Average_flammability: {mean_flammability}')
-
-
+    # Print out the information.
+    print(f"ACME CORPORATION OFFICIAL INVENTORY REPORT")
+    print(f"Unique product names: {num_prod_names}")
+    print(f"Average price: {avg_price:,.02f}")
+    print(f"Average weight: {avg_weight:.02f}")
+    print(f"Average flammability: {avg_flam:.02f}")
 
 
 if __name__ == '__main__':
